@@ -1,0 +1,32 @@
+Steps:
+Navigate to the correct directory (project/nbs):
+
+cd ~/project/nbs
+
+Copy the files from etfs/ and stocks/ to the Docker container:
+
+docker cp ./etfs/. namenode:/home/etfs/
+docker cp ./stocks/. namenode:/home/stocks/
+
+Start the NameNode service:
+hdfs --daemon start namenode
+
+Start the DataNode service:
+hdfs --daemon start datanode
+
+
+Access the Docker container:
+
+docker exec -it namenode bash
+
+Upload files to HDFS:
+
+hdfs dfs -mkdir /data/etfs
+hdfs dfs -put /home/etfs/*.csv /data/etfs/
+hdfs dfs -mkdir /data/stocks
+hdfs dfs -put /home/stocks/*.csv /data/stocks/
+
+Verify Files are in hdfs:
+
+hdfs dfs -ls /data/etfs/
+hdfs dfs -ls /data/stocks/

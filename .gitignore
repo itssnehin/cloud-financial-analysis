@@ -1,0 +1,5 @@
+.env
+hadoop.env
+*.zip
+/etfs/
+/stocks/
